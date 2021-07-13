@@ -1,21 +1,26 @@
-import { NavLink } from "react-router-dom";
+import { NavLink, useHistory } from "react-router-dom";
 
 export const Navegador = (props) => {
   const { log, setLog } = props;
+  const history = useHistory();
+  const desloguearse = () => {
+    history.push("/login");
+    setLog(false);
+  };
   return (
     <ul>
-      <NavLink to="login">
+      <NavLink to={!log ? "login" : "inicio"}>
         <li>Login</li>
       </NavLink>
 
       <>
-        <NavLink to="inicio">
+        <NavLink to={!log ? "login" : "inicio"}>
           <li>Inicio</li>
         </NavLink>
-        <NavLink to="listado">
+        <NavLink to={!log ? "login" : "listado"}>
           <li>Listado</li>
         </NavLink>
-        {log && <button onClick={() => setLog(false)}>Deslogear</button>}
+        {log && <button onClick={desloguearse}>Deslogear</button>}
       </>
     </ul>
   );

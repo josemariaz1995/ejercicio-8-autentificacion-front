@@ -6,7 +6,6 @@ import {
   Redirect,
   useHistory,
 } from "react-router-dom";
-import { NavLink } from "react-router-dom";
 import { Inicio } from "./components/Inicio";
 import { Listados } from "./components/Listado";
 import { Login } from "./components/Login";
@@ -31,7 +30,7 @@ function App() {
     <>
       <Router>
         <header>
-          <Navegador log={log} setLog={setLog} />
+          <Navegador log={log} setLog={setLog} history={history} />
         </header>
         <main>
           <Switch>
@@ -44,10 +43,10 @@ function App() {
               />
             </Route>
             <Route path="/inicio" exact>
-              <Inicio username={username} />
+              {log && <Inicio username={username} />}
             </Route>
             <Route path="/listado" exact>
-              <Listados datos={datos} />
+              {log && <Listados datos={datos} />}
             </Route>
             <Route path="/">
               <Redirect to="/login" />
