@@ -4,20 +4,20 @@ export const Navegador = (props) => {
   const { log, setLog } = props;
   const history = useHistory();
   const desloguearse = () => {
-    history.push("/login");
+    history.push("/usuarios/login");
     setLog(false);
   };
   return (
     <ul>
-      <NavLink to={!log ? "login" : "inicio"}>
+      <NavLink to={!log ? "/usuarios/login" : "/usuarios/inicio"}>
         <li>Login</li>
       </NavLink>
 
       <>
-        <NavLink to={!log ? "login" : "inicio"}>
+        <NavLink to={!log ? "/usuarios/login" : "/usuarios/inicio"}>
           <li>Inicio</li>
         </NavLink>
-        <NavLink to={!log ? "login" : "listado"}>
+        <NavLink to={!log ? "/usuarios/login" : "/items/listado"}>
           <li>Listado</li>
         </NavLink>
         {log && <button onClick={desloguearse}>Deslogear</button>}
