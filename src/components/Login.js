@@ -6,7 +6,7 @@ export const Login = (props) => {
   const loguearse = (e) => {
     e.preventDefault();
     setLog(true);
-    history.push("/inicio");
+    history.push("/usuarios/inicio");
   };
   return (
     <section>
