@@ -1,12 +1,22 @@
+import { useState } from "react";
 import { useHistory } from "react-router-dom";
 
 export const Login = (props) => {
-  const { setUsername, setPassword, setLog } = props;
+  const { setLog, crearAutentificacion, setError, getItems } = props;
   const history = useHistory();
-  const loguearse = (e) => {
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+
+  const loguearse = async (e) => {
     e.preventDefault();
-    setLog(true);
-    history.push("/usuarios/inicio");
+    try {
+      await crearAutentificacion(username, password);
+      setLog(true);
+      await getItems();
+      history.push("/usuarios/inicio");
+    } catch (e) {
+      setError(e.message);
+    }
   };
   return (
     <section>

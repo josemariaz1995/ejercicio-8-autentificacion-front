@@ -5,6 +5,7 @@ export const Navegador = (props) => {
   const history = useHistory();
   const desloguearse = () => {
     history.push("/usuarios/login");
+    localStorage.clear();
     setLog(false);
   };
   return (
