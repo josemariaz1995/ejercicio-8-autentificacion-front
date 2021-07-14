@@ -13,18 +13,31 @@ import { Navegador } from "./components/Navegador";
 import { PaginaNoEcontrada } from "./components/PaginaNoEncontrada";
 
 function App() {
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
   const [log, setLog] = useState(false);
   const [datos, setDatos] = useState([]);
+  const [credenciales, setCredenciales] = useState({});
   const [error, setError] = useState(false);
+  const urlApi = "http://localhost:4000/";
+  const login = "usuarios/login";
+  const items = "items/listado";
 
-  const crearCredenciales = () => {
-    const credenciales = {
+  const crearAutentificacion = async (username, password) => {
+    setCredenciales({
       username,
       password,
-    };
+    });
+    const response = await fetch(urlApi + login, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(credenciales),
+    });
+    const token = await response.json();
+    console.log(token);
+    localStorage.setItem("token", token);
   };
+  const getItems = async () => {};
 
   return (
     <>
@@ -35,13 +48,13 @@ function App() {
         <Switch>
           <Route path="/usuarios/login" exact>
             <Login
-              setPassword={setPassword}
-              setUsername={setUsername}
               setLog={setLog}
+              crearAutentificacion={crearAutentificacion}
+              setError={setError}
             />
           </Route>
           <Route path="/usuarios/inicio" exact>
-            {log && <Inicio username={username} />}
+            {log && <Inicio />}
           </Route>
           <Route path="/items/listado" exact>
             {log && <Listados datos={datos} />}
