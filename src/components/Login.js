@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useHistory } from "react-router-dom";
 
 export const Login = (props) => {
-  const { setLog, crearAutentificacion, setError } = props;
+  const { setLog, crearAutentificacion, setError, getItems } = props;
   const history = useHistory();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -12,6 +12,7 @@ export const Login = (props) => {
     try {
       await crearAutentificacion(username, password);
       setLog(true);
+      await getItems();
       history.push("/usuarios/inicio");
     } catch (e) {
       setError(e.message);
