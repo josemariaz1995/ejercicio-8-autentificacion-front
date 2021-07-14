@@ -4,7 +4,7 @@ export const Listados = (props) => {
     <section>
       <ul>
         {datos.length !== 0
-          ? datos.map((dato) => <li>{dato}</li>)
+          ? datos.map((dato, i) => <li key={i}>{dato}</li>)
           : "No hay datos"}
       </ul>
     </section>

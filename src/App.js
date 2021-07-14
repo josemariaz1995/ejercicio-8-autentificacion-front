@@ -5,15 +5,15 @@ import { Listados } from "./components/Listado";
 import { Login } from "./components/Login";
 import { Navegador } from "./components/Navegador";
 import { PaginaNoEcontrada } from "./components/PaginaNoEncontrada";
-
+require("dotenv").config();
 function App() {
-  require("dotenv").config();
   const [log, setLog] = useState(false);
   const [datos, setDatos] = useState([]);
   const [credenciales, setCredenciales] = useState({});
   const [error, setError] = useState(false);
   const urlApi =
-    process.env.URL_API || "https://ejercicio-node-login.herokuapp.com/";
+    process.env.REACT_APP_URL_API ||
+    "https://ejercicio-node-login.herokuapp.com/";
   const login = "usuarios/login";
   const items = "items/listado";
 
